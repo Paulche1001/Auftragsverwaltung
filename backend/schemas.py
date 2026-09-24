@@ -35,3 +35,13 @@ class OrderCreate(BaseModel):
     priority: OrderPriority
     due_date: date | None = None
     customer_id: int = Field(ge=1)
+
+    @field_validator("title")
+    @classmethod
+    def strip_whitespace(cls, value: str) -> str:
+            value = value.strip()
+    
+            if not value:
+                raise ValueError("Darf nicht leer sein")
+    
+            return value

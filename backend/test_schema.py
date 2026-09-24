@@ -1,10 +1,13 @@
+import pytest
+
 from schemas import CustomerCreate
 
-customer = CustomerCreate(
-    name=" ",
-    email="max@example.com",
-    phone="0123456789",
-    address="Musterstraße 1, Worms"
-)
 
-print(customer)
+def test_customer_name_must_not_be_empty():
+    with pytest.raises(ValueError):
+        CustomerCreate(
+            name=" ",
+            email="test@example.com",
+            phone="123456",
+            address="Teststraße 1"
+        )
